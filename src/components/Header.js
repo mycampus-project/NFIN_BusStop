@@ -1,7 +1,10 @@
-const Header = () => {
+import Button from './Button'
+
+const Header = ( {title} ) => {
   return (
     <header>
-      <h1>Public Transport</h1>
+      <h1>{title}</h1>
+      <Button color='blue' text='Settings'/>
     </header>
   )
 }

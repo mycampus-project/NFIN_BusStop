@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Box from "@material-ui/core/Box";
+import Query from "./components/Query";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,18 +35,20 @@ export default function BusStop() {
             direction="row"
             justify="flex-start"
             alignItems="stretch"
-            spacing={3}
-          >
+            spacing={3}>
             <Grid item xs={6} container direction="column" spacing={2}>
               <Grid item xs>
+                <Paper>
                 <Typography gutterBottom variant="h4" align="left">
                   Pysäkki
                 </Typography>
+                </Paper>
                 <Grid item xs
                   container spacing={3}
                   direction="row"
                   justify="space-evenly"
                   alignItems="stretch" >
+                    <Paper>
                   <Grid>
                     <Typography gutterBottom variant="body1" align="left">
                       Linja1
@@ -57,6 +60,8 @@ export default function BusStop() {
                       Linja3
                     </Typography>
                   </Grid>
+                  </Paper>
+                  <Paper>
                   <Grid>
                     <Typography gutterBottom variant="body1" align="left">
                       Aika1
@@ -68,11 +73,11 @@ export default function BusStop() {
                       Aika3
                     </Typography>
                   </Grid>
+                  </Paper>
                 </Grid>
-                
               </Grid>
             </Grid>
-            <Grid item xs={6} direction="column">
+            <Grid item xs={6} direction="column"  justify="center">
               <Paper backgroundColor="white">
                 <Typography>TEST</Typography>
               </Paper>

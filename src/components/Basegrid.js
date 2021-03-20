@@ -27,10 +27,8 @@ export default function BaseGrid() {
         alignItems="stretch"
         spacing={3}
       >
-        <Grid item xs>
-          <Paper className={classes.paper}>
-              <BusStop></BusStop>
-          </Paper>
+        <Grid item >
+              <BusStop/>
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>juttu2</Paper>

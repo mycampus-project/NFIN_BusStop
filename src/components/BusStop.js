@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     margin: "auto",
     maxWidth: 500,
     backgroundColor: "green",
@@ -28,53 +28,100 @@ export default function BusStop() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container spacing={1}>
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          justify="center"
+          alignItems="stretch"
+        >
           <Grid
+            item
+            xs={6}
             container
-            direction="row"
+            direction="column"
             justify="flex-start"
             alignItems="stretch"
-            spacing={3}
           >
-            <Grid item xs={6} container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="h4" align="left">
+            <Grid item>
+              <Paper>
+                <Typography gutterBottom variant="h4" align="center">
                   Pysäkki
                 </Typography>
-                <Grid item xs
-                  container spacing={3}
-                  direction="row"
-                  justify="space-evenly"
-                  alignItems="stretch" >
-                  <Grid>
+              </Paper>
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="stretch"
+            >
+              
+              <Grid
+                item
+                xs={6}
+                container
+                direction="column"
+                justify="center"
+                alignItems="stretch"
+              >
+                <Paper>
+                  <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
                       Linja1
                     </Typography>
+                  </Grid>
+                  <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
                       Linja2
                     </Typography>
+                  </Grid>
+                  <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
                       Linja3
                     </Typography>
                   </Grid>
-                  <Grid>
-                    <Typography gutterBottom variant="body1" align="left">
+                </Paper>
+              </Grid>
+              <Grid
+                item
+                xs={6}
+                container
+                direction="column"
+                justify="center"
+                alignItems="stretch"
+              >
+                <Paper>
+                  <Grid item xs>
+                    <Typography gutterBottom variant="body1" align="right">
                       Aika1
                     </Typography>
-                    <Typography gutterBottom variant="body1" align="left">
+                  </Grid>
+                  <Grid item xs>
+                    <Typography gutterBottom variant="body1" align="right">
                       Aika2
                     </Typography>
-                    <Typography gutterBottom variant="body1" align="left">
+                  </Grid>
+                  <Grid item xs>
+                    <Typography gutterBottom variant="body1" align="right">
                       Aika3
                     </Typography>
                   </Grid>
-                </Grid>
-                
+                </Paper>
               </Grid>
             </Grid>
-            <Grid item xs={6} direction="column">
+          </Grid>
+          <Grid
+            item
+            xs={6}
+            container
+            direction="column"
+            justify="center"
+            alignItems="stretch"
+          >
+            <Grid item>
               <Paper backgroundColor="white">
-                <Typography>TEST</Typography>
+                <Typography align="center">Map Placeholder</Typography>
               </Paper>
             </Grid>
           </Grid>

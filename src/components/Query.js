@@ -21,7 +21,7 @@ const Query = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data.data)
+      console.log(data)
       console.log(data.data.stop)
       setData(data.data.stop)
     })
@@ -30,8 +30,7 @@ const Query = () => {
 
     })
   },[url])
-
-  let dis = toString([data])
+  
   if (data){
     return (
       <div>

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom'
+import React from 'react';
 import Header from './components/Header'
 import Query from './components/Query'
-import { graphql } from 'graphql';
 import BaseGrid from './components/Basegrid'
 
 function App() {
@@ -14,6 +12,5 @@ function App() {
       </div>
   );
 }
-
 
 export default App;

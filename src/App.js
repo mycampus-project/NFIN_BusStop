@@ -3,6 +3,8 @@ import Header from './components/Header'
 import Query from './components/Query'
 import BaseGrid from './components/Basegrid'
 
+//this is redux comment
+
 function App() {
   return (
       <div className="App">

@@ -19,37 +19,28 @@ const Query = () => {
         }
       }` }),
     })
-    .then(res => {
-      if (res.ok) {
-        console.log(res)
-      }
-      //throw res;
-
-    })
-    .then(res => {
-      //console.log(res)
-      setData(res)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      console.log(data.data.stop)
+      setData(data.data.stop)
     })
     .catch(err => {
       console.error("Error fetching data:", err)
-      
-      //setError(err)
+
     })
-    /*.finally( ()=> {
-      setLoading(false)
-    })*/
   },[url])
 
   if (data){
     return (
       <div>
-        {data.data}
+        {data.name}
       </div>
     )
   }  
 
   return (
-    <div>{}</div>
+    <div>Loading ..</div>
   )
   
 }

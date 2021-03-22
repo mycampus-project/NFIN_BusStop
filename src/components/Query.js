@@ -30,7 +30,7 @@ const Query = () => {
 
     })
   },[url])
-  
+
   if (data){
     return (
       <div>

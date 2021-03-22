@@ -8,22 +8,59 @@ const Query = () => {
 
   useEffect(() => {
 
-    fetch(url, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ "query": `{
-        stop(id: \"HSL:1040129\") {
+    const query = { "query": `{
+      stop(id: \"HSL:1040129\") {
+        name
+        lat
+        lon
+      }
+    }` }
+
+    const query2 = { "query": `{
+        stop(id: \"HSL:1173434\") {
           name
           lat
           lon
+          routes {
+            shortName
+            longName
+          }
         }
-      }` }),
+        route(id: \"HSL:1009\") {
+          shortName
+          longName
+        }
+      }` }
+
+      const query3 = { "query": `{
+        stopsByRadius(lat: 60.221434757806406, lon: 24.757031816028093, radius: 500, first: 4) {
+          edges {
+            node {
+              stop {
+                name
+                lat
+                lon
+              }
+              distance
+            }
+            cursor
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }` }
+  
+    fetch(url, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(query3),
     })
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      console.log(data.data.stop)
-      setData(data.data.stop)
+      //setData(data.data)
     })
     .catch(err => {
       console.error("Error fetching data:", err)
@@ -38,7 +75,6 @@ const Query = () => {
       </div>
     )
   }  
-
   return (
     <div>Loading ..</div>
   )

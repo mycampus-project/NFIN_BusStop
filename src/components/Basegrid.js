@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 export default function BaseGrid(props) {
   const classes = useStyles();
   
-
   for (var i = 0; i < props.data.stopsByRadius.edges.length; i++) {
     console.log(i)
   }
@@ -30,18 +29,13 @@ export default function BaseGrid(props) {
         alignItems="stretch"
         spacing={3}>
 
-        <Grid item >
-              <BusStop data={props.data.stopsByRadius.edges[0].node}/>
-        </Grid>
-        <Grid item >
-              <BusStop data={props.data.stopsByRadius.edges[1].node}/>
-        </Grid>
-        <Grid item >
-              <BusStop data={props.data.stopsByRadius.edges[2].node}/>
-        </Grid>
-        <Grid item >
-              <BusStop data={props.data.stopsByRadius.edges[3].node}/>
-        </Grid>
+        {props.data.stopsByRadius.edges.map((data) => {
+          return (
+          <Grid item >
+            <BusStop data={data}/>
+          </Grid>
+          )})}
+        
       </Grid>
     </div>
   )

@@ -8,7 +8,7 @@ import BaseGrid from './components/Basegrid'
 function App() {
   return (
       <div className="App">
-        <Header color='blue' title='Public Transport' />
+        <Header color='#183693' title='Public Transport' />
         <Query/>
       </div>
   );

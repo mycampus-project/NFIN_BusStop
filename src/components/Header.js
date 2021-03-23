@@ -4,14 +4,14 @@ import Button from './Button'
 const Header = ( { color , title } ) => {
   return (
     <header style = {{ backgroundColor:color}}>
-      <h1>{title}</h1>
+      <h1 style={{ color: 'white' }}>{title}</h1>
       <Button color='white' text='Settings'/>
     </header>
   )
 }
 
 Button.defaultProps = {
-  color: 'blue'
+  color: '#183693'
 }
 
 Button.prototype = {

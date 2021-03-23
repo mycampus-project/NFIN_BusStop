@@ -9,8 +9,7 @@ function App() {
   return (
       <div className="App">
         <Header color='blue' title='Public Transport' />
-        <Query></Query>
-        <BaseGrid></BaseGrid>
+        <Query/>
       </div>
   );
 }

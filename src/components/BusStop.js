@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BusStop() {
+export default function BusStop(props) {
   const classes = useStyles();
 
   return (
@@ -46,7 +44,7 @@ export default function BusStop() {
             <Grid item>
               <Paper>
                 <Typography gutterBottom variant="h4" align="center">
-                  Pysäkki
+                  {props.data.stop.name}
                 </Typography>
               </Paper>
             </Grid>
@@ -68,17 +66,17 @@ export default function BusStop() {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      Linja1
+                      {props.data.stop.stoptimesWithoutPatterns[0].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      Linja2
+                      {props.data.stop.stoptimesWithoutPatterns[1].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      Linja3
+                      {props.data.stop.stoptimesWithoutPatterns[2].headsign}
                     </Typography>
                   </Grid>
                 </Paper>

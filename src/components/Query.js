@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import BaseGrid from './Basegrid'
+
 const Query = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
   const [data, setData] = useState([null]);
@@ -43,24 +45,48 @@ const Query = () => {
               }
               distance
             }
-            cursor
-          }
-          pageInfo {
-            hasNextPage
-            endCursor
           }
         }
       }` }
+
+      const query4 = {"query": `  {
+        stopsByRadius(lat:60.221434757806406,lon:24.757031816028093,radius:500) {
+          edges {
+            node {
+              stop { 
+                gtfsId 
+                name
+                stoptimesWithoutPatterns {
+                  scheduledArrival
+                  realtimeArrival
+                  arrivalDelay
+                  scheduledDeparture
+                  realtimeDeparture
+                  departureDelay
+                  realtime
+                  realtimeState
+                  serviceDay
+                  headsign
+                }
+              }
+              distance
+            }
+          }
+        }
+      }`
+        
+      }
   
     fetch(url, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(query3),
+      body: JSON.stringify(query4),
     })
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      //setData(data.data)
+      setData(data.data)
+      setLoading(false)
     })
     .catch(err => {
       console.error("Error fetching data:", err)
@@ -68,17 +94,19 @@ const Query = () => {
     })
   },[url])
 
-  if (data){
-    return (
-      <div>
-        {data.name}
-      </div>
-    )
-  }  
+
+
   return (
-    <div>Loading ..</div>
+    <div>
+      {loading || !data ? (
+        <h1>Loading ...</h1>
+      ) : (
+        <div>
+          <BaseGrid data={data}/>
+        </div>
+      )}
+    </div>
   )
-  
 }
 
 export default Query

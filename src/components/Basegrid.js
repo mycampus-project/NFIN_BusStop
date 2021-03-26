@@ -16,10 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BaseGrid(props) {
   const classes = useStyles();
-  
-  for (var i = 0; i < props.data.stopsByRadius.edges.length; i++) {
-    console.log(i)
-  }
+ 
   return (
     <div className={classes.root}>
       <Grid

@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
 export default function BusStop(props) {
   const classes = useStyles();
 
+  var start = new Date()
+  start.setHours(0,0,0,0)
+  var current = new Date()
+  var currentFromStart = (current.getTime() - start.getTime()) / 1000
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -44,7 +49,7 @@ export default function BusStop(props) {
             <Grid item>
               <Paper>
                 <Typography gutterBottom variant="h4" align="center">
-                  {props.data.node.stop.name}
+                  {props.data.node.stop.name} {props.data.node.stop.gtfsId} 
                 </Typography>
               </Paper>
             </Grid>
@@ -66,17 +71,17 @@ export default function BusStop(props) {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[0].headsign}
+                      {props.data.node.stop.stoptimesWithoutPatterns[0].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[0].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[1].headsign}
+                      {props.data.node.stop.stoptimesWithoutPatterns[1].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[1].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[2].headsign}
+                      {props.data.node.stop.stoptimesWithoutPatterns[2].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[2].headsign}
                     </Typography>
                   </Grid>
                 </Paper>
@@ -92,17 +97,17 @@ export default function BusStop(props) {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      Aika1
+                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      Aika2
+                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      Aika3
+                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                 </Paper>

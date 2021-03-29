@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import campuses from '../Campuses';
 
 import BaseGrid from './Basegrid'
 
@@ -8,93 +9,51 @@ const Query = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const query = {"query": `{
+    stopsByRadius(lat:${campuses[0].lat},lon:${campuses[0].long},radius:500,first:4) {
+      edges {
+        node {
+          stop { 
+            gtfsId 
+            name
+            stoptimesWithoutPatterns {
+              realtimeArrival
+              headsign
+              trip{
+                routeShortName
+              }
+            }
+          }
+          distance
+        }
+      }
+    }
+  }`
+  }
+
   useEffect(() => {
 
-    const query = { "query": `{
-      stop(id: \"HSL:1040129\") {
-        name
-        lat
-        lon
-      }
-    }` }
+    const fetchData = () => {
+      fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(query),
+      })
+      .then(res => res.json())
+      .then(data => {
+        setData(data.data)
+        setLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        console.error(error)
+      })
+    }
 
-    const query2 = { "query": `{
-        stop(id: \"HSL:1173434\") {
-          name
-          lat
-          lon
-          routes {
-            shortName
-            longName
-          }
-        }
-        route(id: \"HSL:1009\") {
-          shortName
-          longName
-        }
-      }` }
-
-      const query3 = { "query": `{
-        stopsByRadius(lat: 60.221434757806406, lon: 24.757031816028093, radius: 500, first: 4) {
-          edges {
-            node {
-              stop {
-                name
-                lat
-                lon
-              }
-              distance
-            }
-          }
-        }
-      }` }
-
-      const query4 = {"query": `  {
-        stopsByRadius(lat:60.221434757806406,lon:24.757031816028093,radius:500) {
-          edges {
-            node {
-              stop { 
-                gtfsId 
-                name
-                stoptimesWithoutPatterns {
-                  scheduledArrival
-                  realtimeArrival
-                  arrivalDelay
-                  scheduledDeparture
-                  realtimeDeparture
-                  departureDelay
-                  realtime
-                  realtimeState
-                  serviceDay
-                  headsign
-                }
-              }
-              distance
-            }
-          }
-        }
-      }`
-        
-      }
-  
-    fetch(url, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(query4),
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      setData(data.data)
-      setLoading(false)
-    })
-    .catch(err => {
-      console.error("Error fetching data:", err)
-
-    })
-  },[url])
-
-
+    setInterval(() => {
+      fetchData()
+   }, 1000 * 60)
+  }, [])
 
   return (
     <div>

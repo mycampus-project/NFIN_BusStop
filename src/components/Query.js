@@ -14,8 +14,7 @@ const Query = () => {
     stopsByRadius(lat:${campuses[0].lat},lon:${campuses[0].long},radius:500,first:4) {
       edges {
         node {
-          stop { 
-            gtfsId 
+          stop {  
             name
             stoptimesWithoutPatterns {
               realtimeArrival
@@ -38,21 +37,30 @@ const Query = () => {
     body: JSON.stringify(query),
   }
 
+  const fetchData = () => {
+    fetch(url, requestOptions)
+    .then(res => res.json())
+    .then(data => {
+      setData(data.data)
+      setLoading(false)
+    })
+    .catch(err => {
+      setError(err)
+      console.error(error)
+    })
+  }
+
   useEffect(() => {
-    const fetchData = () => {
-      fetch(url, requestOptions)
-      .then(res => res.json())
-      .then(data => {
-        setData(data.data)
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        console.error(error)
-      })
-    }
+    
+    // Fetch to have data as soon as possible
     fetchData()
-  }, delay )
+
+    // Interval to resend the fetch
+    setInterval(() =>{
+      fetchData()
+    }, 20000)
+
+  },[])
 
   return (
     <div>

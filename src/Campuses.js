@@ -2,15 +2,15 @@ const campuses = [
   {
     id: 1,
     name: 'Karaportti',
-    lat: 34.43,
-    long: 34.56,
+    lat: 60.221434757806406,
+    long:  24.757031816028093,
     selected: true
   },
   {
     id: 2,
     name: 'Myyrmäki',
-    lat: 64.34,
-    long: 45.756,
+    lat: 60.25878006399605, 
+    long: 24.844784734714448,
     selected: false
   },
 ];

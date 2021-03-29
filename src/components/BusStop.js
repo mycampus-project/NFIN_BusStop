@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     margin: "auto",
     maxWidth: 500,
-    backgroundColor: "green",
+    backgroundColor: '#183693',
     borderRadius: "10",
     borderColor: "primary.main",
     border: 1,
@@ -22,8 +20,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BusStop() {
+export default function BusStop(props) {
   const classes = useStyles();
+
+  var start = new Date()
+  start.setHours(0,0,0,0)
+  var current = new Date()
+  var currentFromStart = (current.getTime() - start.getTime()) / 1000
 
   return (
     <div className={classes.root}>
@@ -46,7 +49,7 @@ export default function BusStop() {
             <Grid item>
               <Paper>
                 <Typography gutterBottom variant="h4" align="center">
-                  Pysäkki
+                  {props.data.node.stop.name} {props.data.node.stop.gtfsId} 
                 </Typography>
               </Paper>
             </Grid>
@@ -68,17 +71,17 @@ export default function BusStop() {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      Linja1
+                      {props.data.node.stop.stoptimesWithoutPatterns[0].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[0].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      Linja2
+                      {props.data.node.stop.stoptimesWithoutPatterns[1].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[1].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      Linja3
+                      {props.data.node.stop.stoptimesWithoutPatterns[2].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[2].headsign}
                     </Typography>
                   </Grid>
                 </Paper>
@@ -94,17 +97,17 @@ export default function BusStop() {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      Aika1
+                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      Aika2
+                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      Aika3
+                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                 </Paper>

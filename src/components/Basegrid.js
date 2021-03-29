@@ -1,42 +1,46 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import BusStop from "./BusStop"
+import { Paper } from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    color: "white",
   },
 }));
 
-export default function BaseGrid() {
+export default function BaseGrid(props) {
   const classes = useStyles();
-
+ 
   return (
     <div className={classes.root}>
+      <Paper>
       <Grid
         container
         direction="column"
         justify="flex-start"
         alignItems="stretch"
-        spacing={3}
-      >
-        <Grid item >
-              <BusStop/>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>juttu2</Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>juttu3</Paper>
-        </Grid>
+        spacing={1}
+        margin={1}>
+
+        {props.data.stopsByRadius.edges.map((data) => {
+          return (
+          <Grid item >
+            <Paper elevation={3}>
+            <BusStop data={data}/>
+            </Paper>
+          </Grid>
+          )})}
+        
       </Grid>
+      </Paper>
     </div>
-  );
+  )
 }

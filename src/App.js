@@ -1,14 +1,13 @@
 import React from 'react';
-import Header from './components/Header'
-import Query from './components/Query'
-import BaseGrid from './components/Basegrid'
+import NavTabs from './components/Tabs'
+
+//this is redux comment
 
 function App() {
+
   return (
       <div className="App">
-        <Header color='blue' title='Public Transport' />
-        <Query></Query>
-        <BaseGrid></BaseGrid>
+        <NavTabs/>
       </div>
   );
 }

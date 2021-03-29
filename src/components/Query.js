@@ -8,6 +8,7 @@ const Query = () => {
   const [data, setData] = useState([null]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [delay, setDelay] = useState(1000);
 
   const query = {"query": `{
     stopsByRadius(lat:${campuses[0].lat},lon:${campuses[0].long},radius:500,first:4) {
@@ -31,14 +32,15 @@ const Query = () => {
   }`
   }
 
-  useEffect(() => {
+  const requestOptions = {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(query),
+  }
 
+  useEffect(() => {
     const fetchData = () => {
-      fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(query),
-      })
+      fetch(url, requestOptions)
       .then(res => res.json())
       .then(data => {
         setData(data.data)
@@ -49,11 +51,8 @@ const Query = () => {
         console.error(error)
       })
     }
-
-    setInterval(() => {
-      fetchData()
-   }, 1000 * 60)
-  }, [])
+    fetchData()
+  }, delay )
 
   return (
     <div>

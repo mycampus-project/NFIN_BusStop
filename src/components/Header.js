@@ -5,7 +5,8 @@ const Header = ( { color , title } ) => {
   return (
     <header style = {{ backgroundColor:color}}>
       <h1 style={{ color: 'white' }}>{title}</h1>
-      <Button color='white' text='Settings'/>
+{/*      <Button color='white' text='Settings'/>*/}
+
     </header>
   )
 }

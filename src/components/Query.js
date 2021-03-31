@@ -3,18 +3,38 @@ import campuses from '../Campuses';
 
 import BaseGrid from './Basegrid'
 
-const Query = () => {
+const Query = (props) => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
   const [data, setData] = useState([null]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [delay, setDelay] = useState(1000);
 
-  const query = {"query": `{
+  const queryNear = {"query": `{
     stopsByRadius(lat:${campuses[0].lat},lon:${campuses[0].long},radius:500,first:4) {
       edges {
         node {
-          stop { 
-            gtfsId 
+          stop {  
+            name
+            stoptimesWithoutPatterns {
+              realtimeArrival
+              headsign
+              trip{
+                routeShortName
+              }
+            }
+          }
+          distance
+        }
+      }
+    }
+  }`
+  }
+  const queryFav = {"query": `{
+    stopsByRadius(lat:${campuses[1].lat},lon:${campuses[1].long},radius:500,first:4) {
+      edges {
+        node {
+          stop {  
             name
             stoptimesWithoutPatterns {
               realtimeArrival
@@ -31,29 +51,51 @@ const Query = () => {
   }`
   }
 
+  var query = ''
+
+  console.log(props.index)
+    
+  switch (props.index) {
+    case 0:
+      query = queryNear
+      break;
+  
+    case 1:
+      query = queryFav
+      break;
+  }
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(query),
+  }
+
+  const fetchData = () => {
+
+    fetch(url, requestOptions)
+    .then(res => res.json())
+    .then(data => {
+      setData(data.data)
+      setLoading(false)
+    })
+    .catch(err => {
+      setError(err)
+      console.error(error)
+    })
+  }
+
   useEffect(() => {
+    
+    // Fetch to have data as soon as possible
+    fetchData()
 
-    const fetchData = () => {
-      fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(query),
-      })
-      .then(res => res.json())
-      .then(data => {
-        setData(data.data)
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        console.error(error)
-      })
-    }
-
-    setInterval(() => {
+    // Interval to resend the fetch
+    setInterval(() =>{
       fetchData()
-   }, 1000 * 60)
-  }, [])
+    }, 20000)
+
+  },[])
 
   return (
     <div>

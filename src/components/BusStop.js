@@ -49,7 +49,7 @@ export default function BusStop(props) {
             <Grid item>
               <Paper>
                 <Typography gutterBottom variant="h4" align="center">
-                  {props.data.node.stop.name} {props.data.node.stop.gtfsId} 
+                  {props.data.node.stop.name} 
                 </Typography>
               </Paper>
             </Grid>

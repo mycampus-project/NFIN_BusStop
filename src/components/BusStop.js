@@ -40,7 +40,6 @@ export default function BusStop(props) {
         >
           <Grid
             item
-            xs={6}
             container
             direction="column"
             justify="flex-start"
@@ -48,7 +47,7 @@ export default function BusStop(props) {
           >
             <Grid item>
               <Paper>
-                <Typography gutterBottom variant="h4" align="center">
+                <Typography variant="h4" align="center">
                   {props.data.node.stop.name} 
                 </Typography>
               </Paper>
@@ -56,7 +55,7 @@ export default function BusStop(props) {
             <Grid
               container
               direction="row"
-              justify="space-between"
+              justify="space-evenly"
               alignItems="stretch"
             >
               
@@ -69,18 +68,18 @@ export default function BusStop(props) {
                 alignItems="stretch"
               >
                 <Paper>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="left">
+                  <Grid item xs >
+                    <Typography variant="body1" align="left">
                       {props.data.node.stop.stoptimesWithoutPatterns[0].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[0].headsign}
                     </Typography>
                   </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="left">
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body1" align="left">
                       {props.data.node.stop.stoptimesWithoutPatterns[1].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[1].headsign}
                     </Typography>
                   </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="left">
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body1" align="left">
                       {props.data.node.stop.stoptimesWithoutPatterns[2].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[2].headsign}
                     </Typography>
                   </Grid>
@@ -95,18 +94,18 @@ export default function BusStop(props) {
                 alignItems="stretch"
               >
                 <Paper>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="right">
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body1" align="right">
                       {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="right">
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body1" align="right">
                       {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="right">
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body1" align="right">
                       {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>

@@ -4,6 +4,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import SettingsIcon from "@material-ui/icons/Settings";
+import PreferencesMenu from "./Preferences";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -28,7 +30,9 @@ export default function PreferecesBackdropButton() {
         <SettingsIcon />
       </IconButton>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <CircularProgress color="inherit" />
+        <Paper height="600">
+        <PreferencesMenu/>
+        </Paper>
       </Backdrop>
     </div>
   );

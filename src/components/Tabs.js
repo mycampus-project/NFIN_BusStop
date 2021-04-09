@@ -73,7 +73,8 @@ export default function NavTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static"
+      backgroundColor="#183693">
         <Grid
           container
           direction="row"
@@ -81,6 +82,7 @@ export default function NavTabs() {
           spacing={24}
           margin={1}
           alignItems="stretch"
+          
         >
           <Grid item xs={6}>
             <Header color="#183693" title="Public Transport" />

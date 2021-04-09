@@ -5,12 +5,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
     maxWidth: 300,
+    
   },
   chips: {
     display: "flex",
@@ -36,13 +38,12 @@ const MenuProps = {
 };
 
 const choices = [
-  "placeholder",
-  "placeholder",
-  "placeholder",
-  "placeholder",
-  "placeholder",
-  "placeholder",
-  "placeholder",
+  'placehodl',
+  'placehodl',
+  'placehodl',
+  'placehodl',
+  'placehodl',
+  'placehodl',
 ];
 
 function getStyles(name, personName, theme) {
@@ -76,6 +77,13 @@ export default function PreferencesMenu() {
 
   return (
     <div>
+      <Grid
+      container
+        direction="column"
+        justify="flex-start"
+        alignItems="stretch"
+        spacing={1}
+        margin={1}>
       <FormControl className={classes.formControl}>
         <InputLabel id="Placeholder-label">Name</InputLabel>
         <Select
@@ -98,6 +106,7 @@ export default function PreferencesMenu() {
           ))}
         </Select>
       </FormControl>
+      </Grid>
     </div>
   );
 }

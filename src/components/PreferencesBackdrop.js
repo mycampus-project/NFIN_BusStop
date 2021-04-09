@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PreferencesMenu from "./Preferences";
 import { Paper } from "@material-ui/core";
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -30,7 +31,7 @@ export default function PreferecesBackdropButton() {
         <SettingsIcon />
       </IconButton>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <Paper height="600">
+        <Paper>
         <PreferencesMenu/>
         </Paper>
       </Backdrop>

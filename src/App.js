@@ -7,9 +7,8 @@ import {useDispatch} from 'react-redux';
 import {selected, unselected} from './components/actions';
 import {campuses, campus} from './Campuses'
 import { Button } from '@material-ui/core';
-<<<<<<< HEAD
 import NavTabs from './components/Tabs'
-=======
+
 
 
 // const Checker = () => {
@@ -18,7 +17,6 @@ import NavTabs from './components/Tabs'
 //   });
 // };
 
->>>>>>> redux1
 
 
 function App() {
@@ -29,31 +27,16 @@ function App() {
   //{isSelected ? <h3>state information from selected stop</h3> : '' }
   return (
       <div className="App">
-<<<<<<< HEAD
         <NavTabs/>
-=======
->>>>>>> redux1
         {/* <Header color='#183693' title={campuses[0].name} /> */}
         <Query/>
         <button onClick = { () =>
           dispatch(selected(campuses))}> testbtn</button>
         <button onClick = { () =>
-<<<<<<< HEAD
           dispatch(unselected(campuses))}>testbtn2</button>´
           </div>
   );
         }
 
 
-=======
-          dispatch(unselected(campuses))}>testbtn2</button>
-
-
-
-
-
-      </div>
-  );
-}
->>>>>>> redux1
 export default App;

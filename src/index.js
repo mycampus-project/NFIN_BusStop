@@ -3,15 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import allReducers from './components/reducers';
+import { Action } from 'react-redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import { selected } from './components/actions';
+import {useDispatch} from 'react-redux';
 
-const store = createStore(allReducers); //reducers here
+
+const middleware = [thunk];
+const enhancers = compose(
+  applyMiddleware(...middleware),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+);
+
+
+const initialState = {};
+
+const store = createStore(allReducers, initialState, enhancers); //reducers here
 
 store.subscribe(() => console.log(store.getState));
 //when an action is dispatched, reducer takes a look at what was dispatched, specificly the type, and returns a state
-//store.dispatch(action());
+// store.useDispatch(action(selected));
 
 
 ReactDOM.render(

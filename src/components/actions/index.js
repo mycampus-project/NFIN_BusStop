@@ -1,15 +1,15 @@
 
-
-
-const selected = () => {
+const selected = (campus) => {
   return {
-    type: 'SELECTED'
+    type: 'SELECTED',
+    campus: true
   };
 };
 
-const unselected = () => {
+const unselected = (campus) => {
   return {
-    type: 'UNSELECTED'
+    type: 'UNSELECTED',
+    campus: false
   };
 };
 

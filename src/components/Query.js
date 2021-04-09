@@ -3,14 +3,13 @@ import campuses from '../Campuses';
 
 import BaseGrid from './Basegrid'
 
-const Query = () => {
+const Query = (props) => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
   const [data, setData] = useState([null]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [delay, setDelay] = useState(1000);
 
-  const query = {"query": `{
+  const queryNear = {"query": `{
     stopsByRadius(lat:${campuses[0].lat},lon:${campuses[0].long},radius:500,first:4) {
       edges {
         node {
@@ -30,6 +29,55 @@ const Query = () => {
     }
   }`
   }
+  const queryFav = {"query": `{
+    stopsByRadius(lat:${campuses[1].lat},lon:${campuses[1].long},radius:500,first:4) {
+      edges {
+        node {
+          stop {  
+            name
+            stoptimesWithoutPatterns {
+              realtimeArrival
+              headsign
+              trip{
+                routeShortName
+              }
+            }
+          }
+          distance
+        }
+      }
+    }
+  }`
+  }
+
+  const queryFav1 = {"query": `{
+    stop(id: "HSL:1140447") {
+      name
+      stoptimesWithoutPatterns {
+        realtimeArrival
+        headsign
+        trip{
+          routeShortName
+        }
+      }
+    }
+  }`
+  }
+
+  var query = ''
+
+  console.log(props.index)
+    
+  // Switching from neat to favourites
+  switch (props.index) {
+    case 0:
+      query = queryNear
+      break;
+  
+    case 1:
+      query = queryFav
+      break;
+  }
 
   const requestOptions = {
     method: 'POST',
@@ -38,6 +86,7 @@ const Query = () => {
   }
 
   const fetchData = () => {
+
     fetch(url, requestOptions)
     .then(res => res.json())
     .then(data => {
@@ -61,6 +110,16 @@ const Query = () => {
     }, 20000)
 
   },[])
+
+  //console.log(data.stopsByRadius)
+
+  // If data has stopsByRadius 
+  // make them into array(?) of stop
+  // if no then nothing to do with data 
+/*
+  const finalData = {
+    stop: data.stopsByRadius.edges[1].node.stop,
+  }*/
 
   return (
     <div>

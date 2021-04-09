@@ -87,10 +87,10 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Query />
+        <Query index={0}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Favourites here
+        <Query index = {1}/>
       </TabPanel>
     </div>
   );

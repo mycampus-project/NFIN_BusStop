@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BaseGrid(props) {
   const classes = useStyles();
  
+  console.log(props.data)
   return (
     <div className={classes.root}>
       <Paper>
@@ -29,7 +30,7 @@ export default function BaseGrid(props) {
         alignItems="stretch"
         spacing={1}
         margin={1}>
-
+        
         {props.data.stopsByRadius.edges.map((data) => {
           return (
           <Grid item >

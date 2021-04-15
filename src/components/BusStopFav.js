@@ -49,7 +49,7 @@ export default function BusStopFav(props) {
             <Grid item>
               <Paper>
                 <Typography gutterBottom variant="h4" align="center">
-                  {props.data.node.stop.name} 
+                  {props.data.stop.name} 
                 </Typography>
               </Paper>
             </Grid>
@@ -71,17 +71,17 @@ export default function BusStopFav(props) {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[0].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[0].headsign}
+                      {props.data.stop.stoptimesWithoutPatterns[0].trip.routeShortName}, {props.data.stop.stoptimesWithoutPatterns[0].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[1].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[1].headsign}
+                      {props.data.stop.stoptimesWithoutPatterns[1].trip.routeShortName}, {props.data.stop.stoptimesWithoutPatterns[1].headsign}
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[2].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[2].headsign}
+                      {props.data.stop.stoptimesWithoutPatterns[2].trip.routeShortName}, {props.data.stop.stoptimesWithoutPatterns[2].headsign}
                     </Typography>
                   </Grid>
                 </Paper>
@@ -97,17 +97,17 @@ export default function BusStopFav(props) {
                 <Paper>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
+                      {Math.floor((props.data.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60)} min
+                      {Math.floor((props.data.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                   <Grid item xs>
                     <Typography gutterBottom variant="body1" align="right">
-                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60)} min
+                      {Math.floor((props.data.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60)} min
                     </Typography>
                   </Grid>
                 </Paper>

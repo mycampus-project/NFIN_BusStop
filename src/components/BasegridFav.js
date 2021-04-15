@@ -30,14 +30,14 @@ export default function BaseGridFav(props) {
         spacing={1}
         margin={1}>
         
-        {props.data.stopsByRadius.edges.map((data, index) => {
-          return (
-          <Grid item key = { index }>
+        
+          
+          <Grid item>
             <Paper elevation={3}>
-            <BusStopFav data={data}/>
+            <BusStopFav data={props.data}/>
             </Paper>
           </Grid>
-          )})}
+          
         
       </Grid>
       </Paper>

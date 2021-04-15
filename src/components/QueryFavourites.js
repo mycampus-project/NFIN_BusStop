@@ -7,7 +7,7 @@ const QueryFav = () => {
   const [data, setData] = useState([null])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  
+
   const query = {"query": `{
     stop(id: "HSL:1140447") {
       name
@@ -22,6 +22,13 @@ const QueryFav = () => {
   }`
   }
 
+  const requestOptions2 = {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(query),
+  }
+
+
   const requestOptions = {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
@@ -29,6 +36,9 @@ const QueryFav = () => {
   }
 
   const fetchData = () => {
+
+    // For each of fav stops
+
     fetch(url, requestOptions)
     .then(res => res.json())
     .then(data => {
@@ -49,6 +59,7 @@ const QueryFav = () => {
       fetchData()
     }, 20000)
   },[])
+
 
   return (
     <div>

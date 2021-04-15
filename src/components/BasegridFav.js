@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 export default function BaseGridFav(props) {
   const classes = useStyles();
 
+  console.log("Miokka", props.data.stop)
+
   return (
     <div className={classes.root}>
       <Paper>
@@ -29,16 +31,22 @@ export default function BaseGridFav(props) {
         alignItems="stretch"
         spacing={1}
         margin={1}>
-        
-        
-          
-          <Grid item>
+   
+        {/*props.data.map((data, index) => {
+          return (
+          <Grid item key = { index }>
             <Paper elevation={3}>
             <BusStopFav data={props.data}/>
             </Paper>
           </Grid>
-          
-        
+          )})*/}
+
+          <Grid item >
+            <Paper elevation={3}>
+            <BusStopFav data={props.data}/>
+            </Paper>
+          </Grid>
+
       </Grid>
       </Paper>
     </div>

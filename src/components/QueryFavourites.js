@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import campuses from '../Campuses';
 import BaseGridFav from './BasegridFav'
 
 const QueryFav = () => {

@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react';
-import Header from './components/Header'
-import Query from './components/Query'
-import BaseGrid from './components/Basegrid'
+import React from 'react';
 import {useDispatch} from 'react-redux';
 //useSelector,
 import {selected, unselected} from './components/actions';
 import {campuses, campus} from './Campuses'
-import { Button } from '@material-ui/core';
 import NavTabs from './components/Tabs'
-
-
 
 // const Checker = () => {
 //   useEffect(() => {
 //   console.log(campuses);
 //   });
 // };
-
-
 
 function App() {
   var i = 1;
@@ -29,14 +21,13 @@ function App() {
       <div className="App">
         <NavTabs/>
         {/* <Header color='#183693' title={campuses[0].name} /> */}
-        <Query/>
         <button onClick = { () =>
           dispatch(selected(campuses))}> testbtn</button>
         <button onClick = { () =>
           dispatch(unselected(campuses))}>testbtn2</button>´
           </div>
   );
-        }
+}
 
 
 export default App;

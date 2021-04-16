@@ -35,7 +35,8 @@ export default function BusStop(props) {
           alignItems="stretch"
         >
           <Grid
-            item xs
+            item
+            xs
             container
             direction="column"
             justify="flex-start"

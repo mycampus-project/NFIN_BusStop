@@ -1,112 +1,39 @@
-import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import { Grid } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-    maxWidth: 300,
-    
-  },
-  chips: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  chip: {
-    margin: 2,
-  },
-  noLabel: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const choices = [
-  'placehodl',
-  'placehodl',
-  'placehodl',
-  'placehodl',
-  'placehodl',
-  'placehodl',
-];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+import React from 'react';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Switch from '@material-ui/core/Switch';
 
 export default function PreferencesMenu() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [state, setState] = React.useState({
+    campus1: false,
+    campus2: false,
+    campus3: false,
+  });
 
   const handleChange = (event) => {
-    setPersonName(event.target.value);
-  };
-
-  const handleChangeMultiple = (event) => {
-    const { options } = event.target;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setPersonName(value);
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   return (
-    <div>
-      <Grid
-      container
-        direction="column"
-        justify="flex-start"
-        alignItems="stretch"
-        spacing={1}
-        margin={1}>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="Placeholder-label">Name</InputLabel>
-        <Select
-          labelId="Placeholder-label"
-          id="Placeholder-id"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<Input />}
-          MenuProps={MenuProps}
-        >
-          {choices.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      </Grid>
-    </div>
+    <FormControl component="fieldset">
+      <FormLabel component="legend">Choose Campuses</FormLabel>
+      <FormGroup>
+        <FormControlLabel
+          control={<Switch checked={state.campus1} onChange={handleChange} name="campus1" />}
+          label="Campus1"
+        />
+        <FormControlLabel
+          control={<Switch checked={state.campus2} onChange={handleChange} name="campus2" />}
+          label="Campus2"
+        />
+        <FormControlLabel
+          control={<Switch checked={state.campus3} onChange={handleChange} name="campus3" />}
+          label="Campus3"
+        />
+      </FormGroup>
+    </FormControl>
   );
 }

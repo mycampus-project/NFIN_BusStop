@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import BusStop from "./BusStop"
+import BusStopFav from "./BusStopFav"
 import { Paper } from "@material-ui/core";
 
 
@@ -16,8 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BaseGrid(props) {
+export default function BaseGridFav(props) {
   const classes = useStyles();
+
+  console.log("Miokka", props.data.stop)
 
   return (
     <div className={classes.root}>
@@ -29,16 +31,22 @@ export default function BaseGrid(props) {
         alignItems="stretch"
         spacing={1}
         margin={1}>
-        
-        {props.data.stopsByRadius.edges.map((data, index) => {
+   
+        {/*props.data.map((data, index) => {
           return (
           <Grid item key = { index }>
             <Paper elevation={3}>
-            <BusStop data={data}/>
+            <BusStopFav data={props.data}/>
             </Paper>
           </Grid>
-          )})}
-        
+          )})*/}
+
+          <Grid item >
+            <Paper elevation={3}>
+            <BusStopFav data={props.data}/>
+            </Paper>
+          </Grid>
+
       </Grid>
       </Paper>
     </div>

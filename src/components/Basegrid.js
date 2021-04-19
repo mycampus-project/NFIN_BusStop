@@ -33,7 +33,7 @@ export default function BaseGrid(props) {
         
         {props.data.stopsByRadius.edges.map((data) => {
           return (
-          <Grid item >
+          <Grid item xs={12}>
             <Paper elevation={3}>
             <BusStop data={data}/>
             </Paper>

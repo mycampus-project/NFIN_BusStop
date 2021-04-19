@@ -9,6 +9,8 @@ import Box from "@material-ui/core/Box";
 import QueryNear from "./QueryNear";
 import QueryFav from "./QueryFavourites"
 import Header from "./Header";
+import PreferecesBackdropButton from "./PreferencesBackdrop";
+import Grid from "@material-ui/core/Grid";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,7 +48,6 @@ function a11yProps(index) {
 function LinkTab(props) {
   return (
     <Tab
-
       component="a"
       onClick={(event) => {
         event.preventDefault();
@@ -73,9 +74,24 @@ export default function NavTabs() {
 
   return (
     <div className={classes.root}>
-                
-      <AppBar position="static">
-      <Header color='#183693' title='Public Transport' />
+      <AppBar position="static"
+      backgroundColor="#183693">
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          spacing={24}
+          margin={1}
+          alignItems="stretch"
+          
+        >
+          <Grid item xs={6}>
+            <Header color="#183693" title="Public Transport" />
+          </Grid>
+          <Grid item xs={3}>
+            <PreferecesBackdropButton />
+          </Grid>
+        </Grid>
         <Tabs
           variant="fullWidth"
           value={value}

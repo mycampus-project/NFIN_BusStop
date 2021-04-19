@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,108 +12,142 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(1),
     margin: "auto",
-    maxWidth: 500,
-    backgroundColor: '#183693',
-    borderRadius: "10",
-    borderColor: "primary.main",
-    border: 1,
-    borderWidth: "4px solid",
+    backgroundColor: "#183693",
   },
 }));
 
 export default function BusStop(props) {
   const classes = useStyles();
 
-  var start = new Date()
-  start.setHours(0,0,0,0)
-  var current = new Date()
-  var currentFromStart = (current.getTime() - start.getTime()) / 1000
+  var start = new Date();
+  start.setHours(0, 0, 0, 0);
+  var current = new Date();
+  var currentFromStart = (current.getTime() - start.getTime()) / 1000;
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid
           container
-          spacing={2}
+          spacing={1}
           direction="row"
           justify="center"
           alignItems="stretch"
         >
           <Grid
             item
-            xs={6}
+            xs
             container
             direction="column"
             justify="flex-start"
             alignItems="stretch"
           >
-            <Grid item>
-              <Paper>
-                <Typography gutterBottom variant="h4" align="center">
-                  {props.data.node.stop.name} 
+            <Paper elevation={3}>
+              <Grid item>
+                <Typography variant="h4" align="flex-start">
+                  {props.data.node.stop.name}
                 </Typography>
-              </Paper>
-            </Grid>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="stretch"
-            >
-              
-              <Grid
-                item
-                xs={6}
-                container
-                direction="column"
-                justify="center"
-                alignItems="stretch"
-              >
-                <Paper>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[0].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[0].headsign}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[1].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[1].headsign}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="left">
-                      {props.data.node.stop.stoptimesWithoutPatterns[2].trip.routeShortName}, {props.data.node.stop.stoptimesWithoutPatterns[2].headsign}
-                    </Typography>
-                  </Grid>
-                </Paper>
               </Grid>
               <Grid
-                item
-                xs={6}
                 container
-                direction="column"
-                justify="center"
+                direction="row"
+                justify="space-evenly"
                 alignItems="stretch"
               >
-                <Paper>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="right">
-                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
-                    </Typography>
+                <Box display="flex" flexGrow={1}>
+                  <Grid
+                    item
+                    xs={6}
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="stretch"
+                  >
+                    <Grid item xs>
+                      <Typography variant="body1" align="left">
+                        {
+                          props.data.node.stop.stoptimesWithoutPatterns[0].trip
+                            .routeShortName
+                        }
+                        ,{" "}
+                        {
+                          props.data.node.stop.stoptimesWithoutPatterns[0]
+                            .headsign
+                        }
+                      </Typography>
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="body1" align="left">
+                        {
+                          props.data.node.stop.stoptimesWithoutPatterns[1].trip
+                            .routeShortName
+                        }
+                        ,{" "}
+                        {
+                          props.data.node.stop.stoptimesWithoutPatterns[1]
+                            .headsign
+                        }
+                      </Typography>
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="body1" align="left">
+                        {
+                          props.data.node.stop.stoptimesWithoutPatterns[2].trip
+                            .routeShortName
+                        }
+                        ,{" "}
+                        {
+                          props.data.node.stop.stoptimesWithoutPatterns[2]
+                            .headsign
+                        }
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="right">
-                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60)} min
-                    </Typography>
+                  <Grid
+                    item
+                    xs={6}
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="stretch"
+                  >
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="body1" align="right">
+                        {Math.floor(
+                          (props.data.node.stop.stoptimesWithoutPatterns[0]
+                            .realtimeArrival -
+                            currentFromStart) /
+                            60
+                        )}{" "}
+                        min
+                      </Typography>
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="body1" align="right">
+                        {Math.floor(
+                          (props.data.node.stop.stoptimesWithoutPatterns[1]
+                            .realtimeArrival -
+                            currentFromStart) /
+                            60
+                        )}{" "}
+                        min
+                      </Typography>
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="body1" align="right">
+                        {Math.floor(
+                          (props.data.node.stop.stoptimesWithoutPatterns[2]
+                            .realtimeArrival -
+                            currentFromStart) /
+                            60
+                        )}{" "}
+                        min
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="body1" align="right">
-                      {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60)} min
-                    </Typography>
-                  </Grid>
-                </Paper>
+                </Box>
               </Grid>
-            </Grid>
+            </Paper>
           </Grid>
           <Grid
             item
@@ -122,10 +157,12 @@ export default function BusStop(props) {
             justify="center"
             alignItems="stretch"
           >
-            <Grid item>
-              <Paper backgroundColor="white">
-                <Typography align="center">Map Placeholder</Typography>
-              </Paper>
+            <Grid item wrap="nowrap">
+              <Box display="flex">
+                <Paper backgroundColor="white" wrap="nowrap">
+                  <Typography align="center">Map Placeholder</Typography>
+                </Paper>
+              </Box>
             </Grid>
           </Grid>
         </Grid>

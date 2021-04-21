@@ -3,62 +3,63 @@ import BaseGridFav from './BasegridFav'
 
 const QueryFav = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
-  const [data, setData] = useState([null])
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const query = {"query": `{
-    stop(id: "HSL:1140447") {
-      name
-      stoptimesWithoutPatterns {
-        realtimeArrival
-        headsign
-        trip{
-          routeShortName
-        }
-      }
-    }
-  }`
-  }
 
-  const requestOptions2 = {
-    method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(query),
-  }
-
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(query),
-  }
+  var IDs = [
+    {
+      id: "HSL:1140447"
+    },
+    {
+      id: "HSL:6150219"
+    },
+  ]
 
   const fetchData = () => {
 
-    // For each of fav stops
-
-    fetch(url, requestOptions)
-    .then(res => res.json())
-    .then(data => {
-      setData(data.data)
-      setLoading(false)
-    })
-    .catch(err => {
-      setError(err)
-      console.error(error)
-    })
+    for(var i = 0; i < IDs.length; i++){
+      
+      fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({"query": `{
+          stop(id: "${IDs[i].id}") {
+            name
+            stoptimesWithoutPatterns {
+              realtimeArrival
+              headsign
+              trip{
+                routeShortName
+              }
+            }
+          }
+        }`
+        }),
+      }).then(res => res.json())
+      .then(resData => {
+        console.log("resData", resData.data.stop.name)
+        setData(data.concat(resData.data))
+        setLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        console.error(error)
+      })
+    }
   }
 
   useEffect(() => {
     // Fetch to have data as soon as possible
-    fetchData()
+    fetchData()   
     // Interval to resend the fetch
-    setInterval(() =>{
-      fetchData()
-    }, 20000)
+    setInterval(() =>{   
+      fetchData()   
+    }, 10000)
   },[])
 
+  console.log("allData", data)
 
   return (
     <div>

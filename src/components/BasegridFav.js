@@ -39,8 +39,6 @@ export default function BaseGridFav(props) {
           </Grid>
           )})}
 
-          
-
       </Grid>
       </Paper>
     </div>

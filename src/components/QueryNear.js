@@ -52,6 +52,7 @@ const QueryNear = () => {
     // Fetch to have data as soon as possible
     fetchData()
     // Interval to resend the fetch
+    
     setInterval(() =>{
       fetchData()
     }, 20000)

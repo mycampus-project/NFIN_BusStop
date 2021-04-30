@@ -1,34 +1,58 @@
 import React from "react";
 import L from "leaflet"
-import { MapContainer as LeafletMap, TileLayer, Marker } from "react-leaflet";
-//import "./map.css";
+import campus from "../Campuses";
+import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
+import "./map.css";
 
-function setStopIcon(_iconsize) {
-      return L.icon({
-        iconUrl: require("../icon/bus.png"),
-        iconSize: _iconsize
-      })
-}
+/*function setStopIcon(_iconSize) {
+  return L.icon({
+        iconUrl: require("/InnoProject/NFIN_BusStop/src/Icons/bus.png"),
+        iconSize: [_iconSize]
+      });
+    }*/
 
 export default function StopMap() {
-
+  const [getStop, setStop] = React.useState(null);
   const state = {
     lat: 60.225509,
     lng: 24.760651,
-    zoom: 16
+    zoom: 14
   };
 
   const stop1 = [state.lat, state.lng];
- 
+  
   return (
-    <LeafletMap center={[state.lat, state.lng]} zoom={13} /*style={{height: "200px", width: "100%"}}*/ scrollWheelZoom={false}>
+    <LeafletMap center={stop1} zoom={state.zoom} scrollWheelZoom={false} /*style={{height: "200px", width: "100%"}}*/>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={stop1} icon={setStopIcon(20)}>
+      {campus.map(stp => (
+        <Marker
+          key={stp.id}
+          position={[
+            stp.lat,
+            stp.long
+          ]}
+          onClick={() => {
+            setStop(stp);
+          }}
+        />
+      ))}
 
-      </Marker>
+      {getStop && (
+        <Popup
+          position={[
+            getStop.lat,
+            getStop.long
+          ]}
+          onClose={() => {
+            setStop(null);
+          }}
+        >
+        {getStop.name}
+        </Popup>
+      )}
     </LeafletMap>
   );
 }

@@ -21,8 +21,6 @@ function App() {
   return (
       <div className="App">
         <NavTabs/>
-        <StopMap/>
-      </div>
         {/* <Header color='#183693' title={campuses[0].name} /> */}
         <button onClick = { () =>
           dispatch(selected(campuses))}> testbtn</button>

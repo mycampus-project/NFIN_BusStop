@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import L from "leaflet";
+import Campuses from "../Campuses";
 import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import "./map.css";
+import campus from './campus.png'
+import busStop from './busStop.png'
 
-const markerIcon = new L.icon({
-  iconUrl: require('./bus-stop.png'),
-  iconSize: [30, 45]
+const busStopIcon = new L.icon({
+  iconUrl: busStop,
+  iconSize: [20, 20],
+})
+const campusIcon = new L.icon({
+  iconUrl: campus,
+  iconSize: [20, 20],
 })
 
 export default function StopMap(props) {
@@ -14,14 +21,14 @@ export default function StopMap(props) {
   const stop1 = [props.stop.stop.lat, props.stop.stop.lon];
   
   return (
-    <LeafletMap center={stop1} zoom={16} scrollWheelZoom={false}>
+    <LeafletMap center={stop1} zoom={15} scrollWheelZoom={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
         <Marker
           position={[props.stop.stop.lat, props.stop.stop.lon]}
-          icon={markerIcon}
+          icon={busStopIcon}
           onClick={() => {
             setStop(props.stop);
             console.log(props.stop);
@@ -41,6 +48,9 @@ export default function StopMap(props) {
             </div>
           </Popup>
         </Marker>
+
+        <Marker position={[Campuses[0].lat, Campuses[0].long]} icon={campusIcon}/>
+
     </LeafletMap>
   );
 }

@@ -3,11 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-<<<<<<< HEAD
 import StopMapFav from "./MapFav";
-=======
 import Box from "@material-ui/core/Box";
->>>>>>> 9840314b62637e7d08ce4f55cb7fd1cbd10b2fc8
 
 const useStyles = makeStyles((theme) => ({
   root: {

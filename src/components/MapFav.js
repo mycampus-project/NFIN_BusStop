@@ -3,9 +3,11 @@ import L from "leaflet"
 import campus from "../Campuses";
 import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import "./map.css";
+import campusIcon from './campus.png'
+import busStopIcon from './busStop.png'
 
 const markerIcon = new L.Icon({
-    iconUrl: require('./bus-stop.png'),
+    iconUrl: busStopIcon,
     iconSize: [30, 45],
     iconAnchor: [32, 64],
     popupAnchor: null,

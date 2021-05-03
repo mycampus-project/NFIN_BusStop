@@ -14,7 +14,7 @@ export default function StopMap(props) {
   const stop1 = [props.stop.stop.lat, props.stop.stop.lon];
   
   return (
-    <LeafletMap center={stop1} zoom={16} scrollWheelZoom={false}>
+    <LeafletMap center={stop1} zoom={16} scrollWheelZoom={false} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

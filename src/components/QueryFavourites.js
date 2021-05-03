@@ -27,6 +27,8 @@ const QueryFav = () => {
         body: JSON.stringify({"query": `{
           stop(id: "${IDs[i].id}") {
             name
+            lat
+            lon
             stoptimesWithoutPatterns {
               realtimeArrival
               headsign

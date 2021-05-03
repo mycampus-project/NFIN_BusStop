@@ -159,7 +159,7 @@ export default function BusStop(props) {
             alignItems="stretch"
           >
           <Grid item xs zeroMinWidth>
-            <StopMap/>
+            <StopMap stop={props.data.node}/>
             </Grid>
           </Grid>
         </Grid>

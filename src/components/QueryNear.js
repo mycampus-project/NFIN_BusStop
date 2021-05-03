@@ -15,6 +15,8 @@ const QueryNear = () => {
         node {
           stop {  
             name
+            lat
+            lon
             stoptimesWithoutPatterns {
               realtimeArrival
               headsign

@@ -27,30 +27,27 @@ export default function StopMap(props) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {campus.map((stp) => (
         <Marker
-          key={stp.id}
-          position={[stp.lat, stp.long]}
+          position={[props.stop.stop.lat, props.stop.stop.lon]}
           onClick={() => {
-            setStop(stp);
-            console.log(stp);
+            setStop(props.stop);
+            console.log(props.stop);
           }}
         >
           <Popup 
           position={[
-            stp.lat,
-            stp.long
+            props.stop.stop.lat, 
+            props.stop.stop.lon
           ]}
           onClose={() => {
             setStop(null);
           }}>
             <div>
-              <h2>{stp.name}</h2>
-              <p>{stp.id}</p>
+              <h2>{props.stop.stop.name}</h2>
+              <p>{props.stop.distance}</p>
             </div>
           </Popup>
         </Marker>
-      ))}
     </LeafletMap>
   );
 }

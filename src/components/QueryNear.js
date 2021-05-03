@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import campuses from '../Campuses';
 import BaseGrid from './Basegrid'
+import Map from './Map'
 
 const QueryNear = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'

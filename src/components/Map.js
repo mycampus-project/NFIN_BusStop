@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import L from "leaflet"
 import campus from "../Campuses";
 import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
@@ -11,8 +11,8 @@ import "./map.css";
       });
     }*/
 
-export default function StopMap() {
-  const [getStop, setStop] = React.useState(null);
+export default function StopMap(props) {
+  const [getStop, setStop] = useState(null);
   const state = {
     lat: 60.225509,
     lng: 24.760651,
@@ -27,32 +27,30 @@ export default function StopMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {campus.map(stp => (
+      {campus.map((stp) => (
         <Marker
           key={stp.id}
+          position={[stp.lat, stp.long]}
+          onClick={() => {
+            setStop(stp);
+            console.log(stp);
+          }}
+        >
+          <Popup 
           position={[
             stp.lat,
             stp.long
           ]}
-          onClick={() => {
-            setStop(stp);
-          }}
-        />
-      ))}
-
-      {getStop && (
-        <Popup
-          position={[
-            getStop.lat,
-            getStop.long
-          ]}
           onClose={() => {
             setStop(null);
-          }}
-        >
-        {getStop.name}
-        </Popup>
-      )}
+          }}>
+            <div>
+              <h2>{stp.name}</h2>
+              <p>{stp.id}</p>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
     </LeafletMap>
   );
 }

@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 export default function BaseGridFav(props) {
   const classes = useStyles();
 
+  console.log("base", props.data)
+
   return (
     <div className={classes.root}>
       <Paper>
@@ -30,11 +32,11 @@ export default function BaseGridFav(props) {
         spacing={1}
         margin={1}>
    
-        {props.data.map((data, index) => {
+        {props.data.map(data => {
           return (
-          <Grid item key = { index }>
+          <Grid item key = { data.id }>
             <Paper elevation={3}>
-            <BusStopFav data={data}/>
+            <BusStopFav data={ data.data }/>
             </Paper>
           </Grid>
           )})}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BaseGridFav from './BasegridFav'
+import favourites from '../Favourites';
 
 const QueryFav = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
@@ -7,65 +8,75 @@ const QueryFav = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const fetchData = (abortCont) => {
 
-  var IDs = [
-    {
-      id: "HSL:1140447"
-    },
-    {
-      id: "HSL:6150219"
-    },
-  ]
-
-  const fetchData = () => {
-
-    for(var i = 0; i < IDs.length; i++){
+    for(var i = 0; i < favourites.length; ++i){
       
-      fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"query": `{
-          stop(id: "${IDs[i].id}") {
-            name
-            lat
-            lon
-            stoptimesWithoutPatterns {
-              realtimeArrival
-              headsign
-              trip{
-                routeShortName
-              }
+      console.log("mones", i)
+      const query = {"query": `{
+        stop(id: "${favourites[i].id}") {
+          name
+          lat
+          lon
+          stoptimesWithoutPatterns {
+            realtimeArrival
+            headsign
+            trip{
+              routeShortName
             }
           }
-        }`
-        }),
-      }).then(res => res.json())
-      .then(resData => {
-        console.log("resData", resData.data.stop.name)
-        setData(data.concat(resData.data))
-        setLoading(false)
+        }
+      }`
+      }
+    
+      const requestOptions = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(query),
+      }
+      
+      fetch(url, requestOptions, { signal: abortCont.signal})
+      .then(res => res.json())
+      .then(res => {
+        setData([ ... data, {
+          id: data.length,
+          data: res.data
+        }])
+        
       })
       .catch(err => {
         setError(err)
         console.error(error)
       })
+    
     }
   }
 
   useEffect(() => {
+
+    const abortCont = new AbortController()
     // Fetch to have data as soon as possible
-    fetchData()   
+    setTimeout(() => {
+      fetchData(abortCont)
+    }, 500)
     // Interval to resend the fetch
-    setInterval(() =>{   
-      fetchData()   
-    }, 10000)
+    
+    setInterval(() =>{  
+      setTimeout(() => {
+        fetchData(abortCont)
+      }, 500)
+    }, 20000)
+
+    return () => abortCont.abort()
+    
   },[])
 
-  console.log("allData", data)
+
+  console.log("query", data)
 
   return (
     <div>
-      {loading || !data ? (
+      {  !data ? (
         <h1>Loading ...</h1>
       ) : (
         <div>

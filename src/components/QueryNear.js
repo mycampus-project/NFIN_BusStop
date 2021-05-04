@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import campuses from '../Campuses';
 import BaseGrid from './Basegrid'
-import Map from './Map'
 
 const QueryNear = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
@@ -38,28 +37,36 @@ const QueryNear = () => {
     body: JSON.stringify(query),
   }
 
-  const fetchData = () => {
-    fetch(url, requestOptions)
-    .then(res => res.json())
-    .then(data => {
-      setData(data.data)
-      setLoading(false)
-    })
-    .catch(err => {
-      setError(err)
-      console.error(error)
-    })
+  const fetchData = (abortCont) => {
+    setTimeout(() => {
+      fetch(url, requestOptions, { signal: abortCont.signal})
+      .then(res => res.json())
+      .then(data => {
+        setData(data.data)
+        setLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        console.error(error)
+      })
+    }, 100)
   }
 
   useEffect(() => {
+
+    const abortCont = new AbortController();
     // Fetch to have data as soon as possible
-    fetchData()
+    fetchData(abortCont)
     // Interval to resend the fetch
     
     setInterval(() =>{
-      fetchData()
+      fetchData(abortCont)
     }, 20000)
+    return () => abortCont.abort()
+    
   },[])
+
+  console.log("query2", data)
 
   return (
     <div>

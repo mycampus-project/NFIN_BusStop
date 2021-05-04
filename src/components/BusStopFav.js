@@ -125,7 +125,7 @@ export default function BusStopFav(props) {
             alignItems="stretch"
           >
             <Grid item xs zeroMinWidth>
-            <StopMapFav stop={props.data}/>
+            <StopMapFav stop={props.data.stop}/>
             </Grid>
           </Grid>
         </Grid>

@@ -17,11 +17,9 @@ const campusIcon = new L.icon({
 
 export default function StopMap(props) {
   const [getStop, setStop] = useState(null);
-
-  const stop1 = [props.stop.stop.lat, props.stop.stop.lon];
   
   return (
-    <LeafletMap center={stop1} zoom={15} scrollWheelZoom={false} zoomControl={false}>
+    <LeafletMap center={[props.stop.stop.lat, props.stop.stop.lon]} zoom={15} scrollWheelZoom={false} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

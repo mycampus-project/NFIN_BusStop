@@ -42,6 +42,7 @@ const QueryFav = () => {
           id: data.length,
           data: res.data
         }])
+        setLoading(false)
         
       })
       .catch(err => {
@@ -76,7 +77,7 @@ const QueryFav = () => {
 
   return (
     <div>
-      {  !data ? (
+      { loading || !data ? (
         <h1>Loading ...</h1>
       ) : (
         <div>

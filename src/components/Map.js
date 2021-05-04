@@ -5,15 +5,32 @@ import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaf
 import "./map.css";
 import campus from './campus.png'
 import busStop from './busStop.png'
+import styled from "styled-components"
 
 const busStopIcon = new L.icon({
   iconUrl: busStop,
   iconSize: [20, 20],
+  popupAnchor: [-5, -15]
 })
 const campusIcon = new L.icon({
   iconUrl: campus,
   iconSize: [20, 20],
 })
+const StyledPop = styled(Popup)`
+  background: white;
+  border-radius: 0;
+
+  .leaflet-popup-content-wrapper {
+    padding: 1px;
+	  text-align: left;
+	  border-radius: 12px;
+  }
+
+  .leaflet-popup-tip-container {
+    visibility: hidden;
+    overflow: hidden;
+  }
+`;
 
 export default function StopMap(props) {
   const [getStop, setStop] = useState(null);
@@ -34,7 +51,7 @@ export default function StopMap(props) {
             console.log(props.stop);
           }}
         >
-          <Popup 
+          <StyledPop 
           position={[
             props.stop.stop.lat, 
             props.stop.stop.lon
@@ -44,13 +61,27 @@ export default function StopMap(props) {
           }}>
             <div>
               <h2>{props.stop.stop.name}</h2>
-              <p>{props.stop.distance}</p>
+              <span>Nearest stop is </span>
+              <p>{props.stop.distance} m away</p>
             </div>
-          </Popup>
+          </StyledPop>
         </Marker>
 
-        <Marker position={[Campuses[0].lat, Campuses[0].long]} icon={campusIcon}/>
-
+        <Marker position={[Campuses[0].lat, Campuses[0].long]} icon={campusIcon}>
+           <StyledPop 
+          position={[
+            Campuses[0].lat, 
+            Campuses[0].long
+          ]}
+          onClose={() => {
+            setStop(null);
+          }}>
+            <div>
+              <h2>{Campuses[0].name}</h2>
+              <span>{Campuses[0].address}</span>
+            </div>
+          </StyledPop>
+          </Marker>
     </LeafletMap>
   );
 }

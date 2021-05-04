@@ -1,4 +1,3 @@
-import { ContactsOutlined } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 import BaseGridFav from './BasegridFav'
 
@@ -19,8 +18,7 @@ const QueryFav = () => {
   ]
 
   const fetchData = () => {
-    
-    
+
     for(var i = 0; i < IDs.length; i++){
       
       fetch(url, {
@@ -46,7 +44,6 @@ const QueryFav = () => {
         console.log("resData", resData.data.stop.name)
         setData(data.concat(resData.data))
         setLoading(false)
-
       })
       .catch(err => {
         setError(err)
@@ -57,16 +54,15 @@ const QueryFav = () => {
 
   useEffect(() => {
     // Fetch to have data as soon as possible
-    fetchData()
+    fetchData()   
     // Interval to resend the fetch
-    
-    setInterval(() =>{  
-      setData([])
+    setInterval(() =>{   
       fetchData()   
     }, 10000)
   },[])
 
   console.log("allData", data)
+
   return (
     <div>
       {loading || !data ? (
@@ -78,7 +74,6 @@ const QueryFav = () => {
       )}
     </div>
   )
-  
 }
 
 export default QueryFav

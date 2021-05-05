@@ -11,6 +11,8 @@ import QueryFav from "./QueryFavourites"
 import Header from "./Header";
 import PreferecesBackdropButton from "./PreferencesBackdrop";
 import Grid from "@material-ui/core/Grid";
+import AllCampuses from "../AllCampuses";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,7 +85,7 @@ export default function NavTabs() {
           spacing={24}
           margin={1}
           alignItems="stretch"
-          
+
         >
           <Grid item xs={6}>
             <Header color="#183693" title="Public Transport" />
@@ -109,6 +111,7 @@ export default function NavTabs() {
       <TabPanel value={value} index={1}>
         <QueryFav/>
       </TabPanel>
+      <AllCampuses/>
     </div>
   );
 }

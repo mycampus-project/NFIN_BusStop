@@ -72,7 +72,7 @@ export default function BusStop(props) {
                           props.data.node.stop.stoptimesWithoutPatterns[0].trip
                             .routeShortName
                         }
-                        ,{" "}
+                        ,
                         {
                           props.data.node.stop.stoptimesWithoutPatterns[0]
                             .headsign
@@ -85,7 +85,7 @@ export default function BusStop(props) {
                           props.data.node.stop.stoptimesWithoutPatterns[1].trip
                             .routeShortName
                         }
-                        ,{" "}
+                        ,
                         {
                           props.data.node.stop.stoptimesWithoutPatterns[1]
                             .headsign
@@ -98,7 +98,7 @@ export default function BusStop(props) {
                           props.data.node.stop.stoptimesWithoutPatterns[2].trip
                             .routeShortName
                         }
-                        ,{" "}
+                        ,
                         {
                           props.data.node.stop.stoptimesWithoutPatterns[2]
                             .headsign
@@ -116,35 +116,17 @@ export default function BusStop(props) {
                   >
                     <Grid item xs zeroMinWidth>
                       <Typography variant="body1" align="right">
-                        {Math.floor(
-                          (props.data.node.stop.stoptimesWithoutPatterns[0]
-                            .realtimeArrival -
-                            currentFromStart) /
-                            60
-                        )}{" "}
-                        min
+                        {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[0].realtimeArrival - currentFromStart) / 60)} min
                       </Typography>
                     </Grid>
                     <Grid item xs zeroMinWidth>
                       <Typography variant="body1" align="right">
-                        {Math.floor(
-                          (props.data.node.stop.stoptimesWithoutPatterns[1]
-                            .realtimeArrival -
-                            currentFromStart) /
-                            60
-                        )}{" "}
-                        min
+                        {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[1].realtimeArrival - currentFromStart) / 60 )} min
                       </Typography>
                     </Grid>
                     <Grid item xs zeroMinWidth>
                       <Typography variant="body1" align="right">
-                        {Math.floor(
-                          (props.data.node.stop.stoptimesWithoutPatterns[2]
-                            .realtimeArrival -
-                            currentFromStart) /
-                            60
-                        )}{" "}
-                        min
+                        {Math.floor((props.data.node.stop.stoptimesWithoutPatterns[2].realtimeArrival - currentFromStart) / 60 )} min
                       </Typography>
                     </Grid>
                   </Grid>

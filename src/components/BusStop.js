@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 export default function BusStop(props) {
   const classes = useStyles();
 
+  // Making the time match the format of the HSL api
+  // Shownig time in format og minutes to arrival 
   var start = new Date();
   start.setHours(0, 0, 0, 0);
   var current = new Date();

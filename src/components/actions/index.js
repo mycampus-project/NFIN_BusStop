@@ -1,3 +1,5 @@
+import campuses from "../../Campuses";
+
 
 const selected = (campus) => {
   return {
@@ -6,6 +8,25 @@ const selected = (campus) => {
   };
 };
 
+
+const addcampus = (campus) => {
+  return {
+    type: 'ADD_CAMPUS',
+    payload: {campus}
+  };
+};
+
+
+
+const getcampuses = (state) => {
+  const getc = state => state.campuses;
+  return {
+    type: 'GET_CAMPUSES',
+    payload: {getc}
+  };
+};
+
+
 const unselected = (campus) => {
   return {
     type: 'UNSELECTED',
@@ -13,4 +34,4 @@ const unselected = (campus) => {
   };
 };
 
-export {selected, unselected};
+export {selected, unselected, getcampuses, addcampus};

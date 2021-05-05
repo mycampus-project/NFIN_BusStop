@@ -31,7 +31,7 @@ export default function BaseGridFav(props) {
         alignItems="stretch"
         spacing={1}
         margin={1}>
-   
+  
         {props.data.map(data => {
           return (
           <Grid item key = { data.id }>

@@ -8,9 +8,11 @@ const QueryFav = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+
   const fetchData = (abortCont) => {
 
     for(var i = 0; i < favourites.length; ++i){
+
       
       console.log("mones", i)
       const query = {"query": `{
@@ -25,6 +27,7 @@ const QueryFav = () => {
               routeShortName
             }
           }
+
         }
       }`
       }
@@ -43,8 +46,8 @@ const QueryFav = () => {
           data: res.data
         }])
         setLoading(false)
-        
       })
+      // Catching errors and loging them to console
       .catch(err => {
         setError(err)
         console.error(error)
@@ -57,12 +60,16 @@ const QueryFav = () => {
 
     const abortCont = new AbortController()
     // Fetch to have data as soon as possible
+
     setTimeout(() => {
       fetchData(abortCont)
     }, 500)
     // Interval to resend the fetch
+
     
+    // Seting interval for app to fetch the new info on bus stops
     setInterval(() =>{  
+
       setTimeout(() => {
         fetchData(abortCont)
       }, 500)
@@ -72,8 +79,8 @@ const QueryFav = () => {
     
   },[])
 
-
-  console.log("query", data)
+  // If there is no data and loading is
+  // true the BaseGridFav will not be displayed
 
   return (
     <div>

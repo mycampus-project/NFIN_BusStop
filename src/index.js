@@ -10,6 +10,8 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { selected } from './components/actions';
 import {useDispatch} from 'react-redux';
+import AllCampuses from './AllCampuses';
+
 
 
 const middleware = [thunk];
@@ -19,9 +21,7 @@ const enhancers = compose(
 );
 
 
-const initialState = {};
-
-const store = createStore(allReducers, initialState, enhancers); //reducers here
+const store = createStore(allReducers, enhancers); //reducers here
 
 store.subscribe(() => console.log(store.getState));
 //when an action is dispatched, reducer takes a look at what was dispatched, specificly the type, and returns a state

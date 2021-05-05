@@ -16,17 +16,17 @@ export default function StopMapFav(props) {
   //*Map centers based on bus stop location 
   //*Markers and popoups added to campuses and stops 
   return (
-    <LeafletMap center={[props.stop.stop.lat, props.stop.stop.lon]} zoom={16} scrollWheelZoom={false} zoomControl={false}>
+    <LeafletMap center={[props.stop.lat, props.stop.lon]} zoom={16} scrollWheelZoom={false} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
         <Marker
           position={[props.stop.lat, props.stop.lon]}
-          icon={busStopIcon}
+          icon={markerIcon}
           onClick={() => {
-            setStop(props.stop.stop);
-            console.log(props.stop.stop);
+            setStop(props.stop);
+            console.log(props.stop);
           }}
         >
           <Popup 

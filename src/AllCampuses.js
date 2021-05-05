@@ -25,8 +25,9 @@ class AllCampuses extends Component {
   }
 
   render(){
+    // Add () at the end of the function to use it. (Not working right now)
     return (
-      <div>{this.renderCampuses()}<p>Moikkamoi</p></div>
+      <div>{this.renderCampuses}</div> 
       
     )
   };

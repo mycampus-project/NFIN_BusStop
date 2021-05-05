@@ -7,6 +7,7 @@ import campus from './campus.png'
 import busStop from './busStop.png'
 import styled from "styled-components"
 
+//* Custom icon that marker component uses
 const busStopIcon = new L.icon({
   iconUrl: busStop,
   iconSize: [20, 20],
@@ -16,6 +17,8 @@ const campusIcon = new L.icon({
   iconUrl: campus,
   iconSize: [20, 20],
 })
+
+//* Styled popup that gets passed on popup component and shows a popup when marker is clicked
 const StyledPop = styled(Popup)`
   background: white;
   border-radius: 0;
@@ -32,13 +35,14 @@ const StyledPop = styled(Popup)`
   }
 `;
 
+//*Map component that fires up the map
 export default function StopMap(props) {
   const [getStop, setStop] = useState(null);
-
-  const stop1 = [props.stop.stop.lat, props.stop.stop.lon];
-  
+  //*Map centers based on bus stop location 
+  //*Markers and popoups added to campuses and stops 
   return (
-    <LeafletMap center={stop1} zoom={15} scrollWheelZoom={false} zoomControl={false}>
+    <div>
+    <LeafletMap center={[props.stop.stop.lat, props.stop.stop.lon]} zoom={14} scrollWheelZoom={false} zoomControl={false} dragging={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -46,7 +50,7 @@ export default function StopMap(props) {
         <Marker
           position={[props.stop.stop.lat, props.stop.stop.lon]}
           icon={busStopIcon}
-          onClick={() => {
+          onClick={() => { //sets the bus stop where the marker is located
             setStop(props.stop);
             console.log(props.stop);
           }}
@@ -56,7 +60,7 @@ export default function StopMap(props) {
             props.stop.stop.lat, 
             props.stop.stop.lon
           ]}
-          onClose={() => {
+          onClose={() => { // When popup is closed, onClose function will set the state as null and popup is closed
             setStop(null);
           }}>
             <div>
@@ -66,9 +70,9 @@ export default function StopMap(props) {
             </div>
           </StyledPop>
         </Marker>
-
+      
         <Marker position={[Campuses[0].lat, Campuses[0].long]} icon={campusIcon}>
-           <StyledPop 
+           <StyledPop // Campus locations shown as markers
           position={[
             Campuses[0].lat, 
             Campuses[0].long
@@ -83,5 +87,7 @@ export default function StopMap(props) {
           </StyledPop>
           </Marker>
     </LeafletMap>
+    </div>
   );
 }
+

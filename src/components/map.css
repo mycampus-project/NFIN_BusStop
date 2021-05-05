@@ -1,3 +1,4 @@
+/*Leaflet map requires a height and width to show the map so this .css file defines it*/
 .leaflet-container {
     height: 300px;
     width: 100%;

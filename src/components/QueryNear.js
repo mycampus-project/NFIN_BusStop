@@ -55,7 +55,7 @@ const QueryNear = () => {
         console.error(error)
       })
     }, 100)
-
+  }
   useEffect(() => {
 
     const abortCont = new AbortController();

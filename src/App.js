@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import { useSelector } from 'react-redux'
 import {selected, unselected, getcampuses, addcampus} from './components/actions';
 import {campuses, campus} from './Campuses'
+import AllCampuses from "./AllCampuses";
 
 // const Checker = () => {
 //   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
   return (
       <div className="App">
         <NavTabs/>
+        <AllCampuses/>
         {/* <Header color='#183693' title={campuses[0].name} /> */}
         <button onClick = { () =>
           dispatch(selected(campuses))}> testbtn</button>

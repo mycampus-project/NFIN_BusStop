@@ -26,13 +26,11 @@ class AllCampuses extends Component {
 
   render(){
     return (
-      <div>{this.renderCampuses}</div>
+      <div>{this.renderCampuses()}<p>Moikkamoi</p></div>
+      
     )
   };
-
-
 }
-
 
 const getcampuses = state => state.campuses;
 const mapStateToProps = (state) => {

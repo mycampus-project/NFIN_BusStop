@@ -9,22 +9,20 @@ const initialState = {
 
 const campusesReducer = (state=initialState, action) => {
 switch(action.type){
-  case 'GET_CAMPUSES': {
-     return {...state, campuses: [...state.campuses, action.payload]}
-  }
   case 'ADD_CAMPUS': {
     return {...state, campuses: [...state.campuses, action.payload]}
+    //return new state containing current campuses
   }
   default:
     return state;
   }
 }
 
-export const GCampuses = () => (dispatch, getState) => {
-  const campuses1 = getState().campuses;
-  return{
-    campuses1
-  }
-}
+// export const GCampuses = () => (dispatch, getState) => {
+//   const campuses1 = getState().campuses;
+//   return{
+//     campuses1
+//   }
+// }
 
 export default campusesReducer;

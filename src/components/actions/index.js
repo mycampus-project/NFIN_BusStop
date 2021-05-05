@@ -1,5 +1,6 @@
 import campuses from "../../Campuses";
 
+// This file contains actions to be dispatched to reduders
 
 const selected = (campus) => {
   return {

@@ -3,8 +3,7 @@ import isSelectedReducer from './isSelected';
 import {combineReducers} from 'redux';
 import campusesReducer from './campusReducers';
 
-
-
+//rootReducer to pass to store in index.js
 const allReducers = combineReducers({
   // whatever name: <Actual reducer>
   isSelectedReducer: isSelectedReducer,

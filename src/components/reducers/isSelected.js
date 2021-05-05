@@ -1,5 +1,6 @@
 
 //define defaultstate if necessary
+//Intented to filter visible favourite Bus-stops
 
 const initialState = {
   campuses: [],

@@ -7,36 +7,20 @@ import {selected, unselected, getcampuses, addcampus} from './components/actions
 import {campuses, campus} from './Campuses'
 import AllCampuses from "./AllCampuses";
 
-// const Checker = () => {
-//   useEffect(() => {
-//   console.log(campuses);
-//   });
-// };
-
 function App() {
   var i = 1;
   const dispatch = useDispatch();
 
-  const testcampus = [
-    {
-      id: 4,
-      name: 'testi',
-      lat: 61.221434757806406,
-      long:  23.757031816028093,
-      selected: true
-    } ]
-  //const action = useSelector(state => state.action);
-  //<h3>Action {action}</h3>
-  //{isSelected ? <h3>state information from selected stop</h3> : '' }
+//Commented onClick functions to dispatch actions to store, time was not sufficient
+//to fully adapt redux to logic flow of the app
+{/* <button onClick = { () =>
+          dispatch(selected(campuses))}> testbtn</button>
+        <button onClick = { () =>
+          dispatch(addcampus(testcampus))}>testbtn2</button>´ */}
   return (
       <div className="App">
         <NavTabs/>
         <AllCampuses/>
-        {/* <Header color='#183693' title={campuses[0].name} /> */}
-        <button onClick = { () =>
-          dispatch(selected(campuses))}> testbtn</button>
-        <button onClick = { () =>
-          dispatch(addcampus(testcampus))}>testbtn2</button>´
           </div>
   );
 }

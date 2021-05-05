@@ -7,6 +7,8 @@ let campus = {
 };
 
 
+//campus objects designed to work with queries and redux
+
 const campuses = [
   {
     id: 1,

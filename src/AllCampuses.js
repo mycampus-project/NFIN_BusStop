@@ -9,7 +9,7 @@ import { StoreRounded } from "@material-ui/icons";
 import { storeKeyNameFromField } from "@apollo/client/utilities";
 
 
-
+//redux wrapper component that returns campuses
 class AllCampuses extends Component {
 
 
@@ -25,14 +25,15 @@ class AllCampuses extends Component {
   }
 
   render(){
-    // Add () at the end of the function to use it. (Not working right now)
+
     return (
-      <div>{this.renderCampuses}</div> 
-      
+      <div>{this.renderCampuses}</div>
+
     )
   };
 }
 
+//selector to get campuses
 const getcampuses = state => state.campuses;
 const mapStateToProps = (state) => {
 

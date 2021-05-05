@@ -27,11 +27,11 @@ export default function StopMapFav(props) {
           }}
         >
           <Popup 
-          position={[
+            position={[
             props.stop.lat, props.stop.lon]}
-          onClose={() => {
-            setStop(null);
-          }}>
+            onClose={() => {
+              setStop(null);
+            }}>
             <div>
               <h2>{props.stop.name}</h2>
             </div>

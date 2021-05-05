@@ -1,6 +1,6 @@
-import { ContactsOutlined } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 import BaseGridFav from './BasegridFav'
+import favourites from '../Favourites';
 
 const QueryFav = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
@@ -9,67 +9,82 @@ const QueryFav = () => {
   const [error, setError] = useState(null)
 
 
-  var IDs = [
-    {
-      id: "HSL:1140447"
-    },
-    {
-      id: "HSL:6150219"
-    },
-  ]
+  const fetchData = (abortCont) => {
 
-  const fetchData = () => {
-    
-    
-    for(var i = 0; i < IDs.length; i++){
+    for(var i = 0; i < favourites.length; ++i){
+
       
-      fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"query": `{
-          stop(id: "${IDs[i].id}") {
-            name
-            lat
-            lon
-            stoptimesWithoutPatterns {
-              realtimeArrival
-              headsign
-              trip{
-                routeShortName
-              }
+      console.log("mones", i)
+      const query = {"query": `{
+        stop(id: "${favourites[i].id}") {
+          name
+          lat
+          lon
+          stoptimesWithoutPatterns {
+            realtimeArrival
+            headsign
+            trip{
+              routeShortName
             }
           }
-        }`
-        }),
-      }).then(res => res.json())
-      .then(resData => {
-        console.log("resData", resData.data.stop.name)
-        setData(data.concat(resData.data))
-        setLoading(false)
 
+        }
+      }`
+      }
+    
+      const requestOptions = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(query),
+      }
+      
+      fetch(url, requestOptions, { signal: abortCont.signal})
+      .then(res => res.json())
+      .then(res => {
+        setData([ ... data, {
+          id: data.length,
+          data: res.data
+        }])
+        setLoading(false)
       })
+      // Catching errors and loging them to console
       .catch(err => {
         setError(err)
         console.error(error)
       })
+    
     }
   }
 
   useEffect(() => {
+
+    const abortCont = new AbortController()
     // Fetch to have data as soon as possible
-    fetchData()
+
+    setTimeout(() => {
+      fetchData(abortCont)
+    }, 500)
     // Interval to resend the fetch
+
     
+    // Seting interval for app to fetch the new info on bus stops
     setInterval(() =>{  
-      setData([])
-      fetchData()   
-    }, 10000)
+
+      setTimeout(() => {
+        fetchData(abortCont)
+      }, 500)
+    }, 20000)
+
+    return () => abortCont.abort()
+    
   },[])
 
-  console.log("allData", data)
+  // If there is no data and loading is
+  // true the BaseGridFav will not be displayed
+
   return (
     <div>
-      {loading || !data ? (
+      { loading || !data ? (
         <h1>Loading ...</h1>
       ) : (
         <div>
@@ -78,7 +93,6 @@ const QueryFav = () => {
       )}
     </div>
   )
-  
 }
 
 export default QueryFav

@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
 export default function BusStopFav(props) {
   const classes = useStyles();
 
+  // Making the time match the format of the HSL api
+  // Shownig time in format og minutes to arrival 
   var start = new Date()
   start.setHours(0,0,0,0)
   var current = new Date()
@@ -125,7 +127,7 @@ export default function BusStopFav(props) {
             alignItems="stretch"
           >
             <Grid item xs zeroMinWidth>
-            <StopMapFav stop={props.data}/>
+            <StopMapFav stop={props.data.stop}/>
             </Grid>
           </Grid>
         </Grid>

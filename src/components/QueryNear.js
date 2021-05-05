@@ -4,8 +4,8 @@ import BaseGrid from './Basegrid'
 
 const QueryNear = () => {
   const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
-  const [data, setData] = useState([null])
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState({})
+  const [loading, setLoading] = useState({})
   const [error, setError] = useState(null)
 
   // Query used in fetch

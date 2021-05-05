@@ -12,7 +12,8 @@ let campus = {
 const campuses = [
   {
     id: 1,
-    name: 'Karaportti',
+    name: 'Nokia Campus Karaportti',
+    address: 'Karaportti 3',
     lat: 60.221434757806406,
     long:  24.757031816028093,
     selected: true

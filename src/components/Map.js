@@ -5,35 +5,44 @@ import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaf
 import "./map.css";
 import campus from './campus.png'
 import busStop from './busStop.png'
+import styled from "styled-components"
 
+//* Custom icon that marker component uses
 const busStopIcon = new L.icon({
   iconUrl: busStop,
   iconSize: [20, 20],
+  popupAnchor: [-5, -15]
 })
 const campusIcon = new L.icon({
   iconUrl: campus,
   iconSize: [20, 20],
 })
 
+//* Styled popup that gets passed on popup component and shows a popup when marker is clicked
+const StyledPop = styled(Popup)`
+  background: white;
+  border-radius: 0;
+
+  .leaflet-popup-content-wrapper {
+    padding: 1px;
+	  text-align: left;
+	  border-radius: 12px;
+  }
+
+  .leaflet-popup-tip-container {
+    visibility: hidden;
+    overflow: hidden;
+  }
+`;
+
+//*Map component that fires up the map
 export default function StopMap(props) {
   const [getStop, setStop] = useState(null);
-  const [currentPos, setcurrentPos] = useState(null)
-  //handleClick = this.handleClick.bind(this);
-
-  const handleClick= (e) => {
-    setcurrentPos({ currentPos: e.latlng });
-    console.log(e.latlng.lat)
-  }
-  
+  //*Map centers based on bus stop location 
+  //*Markers and popoups added to campuses and stops 
   return (
-    <LeafletMap 
-      center={[props.stop.stop.lat, props.stop.stop.lon]} 
-      zoom={15} 
-      scrollWheelZoom={false} 
-      zoomControl={false}
-      onClick={handleClick}
-    >
-
+    <div>
+    <LeafletMap center={[props.stop.stop.lat, props.stop.stop.lon]} zoom={14} scrollWheelZoom={false} zoomControl={false} dragging={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -41,30 +50,44 @@ export default function StopMap(props) {
         <Marker
           position={[props.stop.stop.lat, props.stop.stop.lon]}
           icon={busStopIcon}
-          onClick={() => {
+          onClick={() => { //sets the bus stop where the marker is located
             setStop(props.stop);
             console.log(props.stop);
           }}
         >
-          <Popup position={[props.stop.stop.lat, props.stop.stop.lon]}
-            onClose={() => {
-              setStop(null);
-            }}>
+          <StyledPop 
+          position={[
+            props.stop.stop.lat, 
+            props.stop.stop.lon
+          ]}
+          onClose={() => { // When popup is closed, onClose function will set the state as null and popup is closed
+            setStop(null);
+          }}>
             <div>
               <h2>{props.stop.stop.name}</h2>
-              <p>{props.stop.distance}</p>
+              <span>Nearest stop is </span>
+              <p>{props.stop.distance} m away</p>
             </div>
-          </Popup>
+          </StyledPop>
         </Marker>
-
-        <Marker position={[Campuses[0].lat, Campuses[0].long]} icon={campusIcon}/>
-        
-        {/* currentPos && <Marker position={currentPos} draggable={true}>
-            <Popup position={currentPos}>
-              Current location: <pre>{JSON.stringify(currentPos, null, 2)}</pre>
-            </Popup>
-          </Marker>*/}
-
+      
+        <Marker position={[Campuses[0].lat, Campuses[0].long]} icon={campusIcon}>
+           <StyledPop // Campus locations shown as markers
+          position={[
+            Campuses[0].lat, 
+            Campuses[0].long
+          ]}
+          onClose={() => {
+            setStop(null);
+          }}>
+            <div>
+              <h2>{Campuses[0].name}</h2>
+              <span>{Campuses[0].address}</span>
+            </div>
+          </StyledPop>
+          </Marker>
     </LeafletMap>
+    </div>
   );
 }
+

@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import L from "leaflet"
-import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer as LeafletMap, TileLayer, Marker, Popup} from "react-leaflet";
 import "./map.css";
-import busStop from './busStop.png'
+import busStopIcon from './busStop.png'
 
-const busStopIcon = new L.icon({
-  iconUrl: busStop,
-  iconSize: [20, 20],
-})
-
+//* Custom icon that marker component uses
+const markerIcon = new L.Icon({
+    iconUrl: busStopIcon,
+    iconSize: [20, 20],
+    iconAnchor: [-5, -15],
+  })
+//*Map component that fires up the map
 export default function StopMapFav(props) {
   const [getStop, setStop] = useState(null);
-  
+  //*Map centers based on bus stop location 
+  //*Markers and popoups added to campuses and stops 
   return (
-    <LeafletMap center={[props.stop.lat, props.stop.lon]} zoom={15} scrollWheelZoom={false} zoomControl={false}>
+    <LeafletMap center={[props.stop.stop.lat, props.stop.stop.lon]} zoom={16} scrollWheelZoom={false} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -22,8 +25,8 @@ export default function StopMapFav(props) {
           position={[props.stop.lat, props.stop.lon]}
           icon={busStopIcon}
           onClick={() => {
-            setStop(props);
-            console.log(props);
+            setStop(props.stop.stop);
+            console.log(props.stop.stop);
           }}
         >
           <Popup 

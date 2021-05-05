@@ -31,6 +31,7 @@ export default function BaseGridFav(props) {
         margin={1}>
    
         {props.data.map((data, index) => {
+          // Doing this to every bus stop in data
           return (
           <Grid item key = { index }>
             <Paper elevation={3}>

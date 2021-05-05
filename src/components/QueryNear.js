@@ -9,6 +9,7 @@ const QueryNear = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  // Query used in fetch
   const query = {"query": `{
     stopsByRadius(lat:${campuses[0].lat},lon:${campuses[0].long},radius:500,first:4) {
       edges {
@@ -31,20 +32,23 @@ const QueryNear = () => {
     }
   }`
   }
-
+  // RequestOptions for the fetch
   const requestOptions = {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(query),
   }
 
+  // Function goes feches data from hsl
   const fetchData = () => {
     fetch(url, requestOptions)
     .then(res => res.json())
     .then(data => {
+      // After getting response save it to state 
       setData(data.data)
       setLoading(false)
     })
+    // Catching errors and loging them to console
     .catch(err => {
       setError(err)
       console.error(error)
@@ -54,13 +58,15 @@ const QueryNear = () => {
   useEffect(() => {
     // Fetch to have data as soon as possible
     fetchData()
-    // Interval to resend the fetch
-    
+
+    // Seting interval for app to fetch the new info on bus stops
     setInterval(() =>{
       fetchData()
     }, 20000)
   },[])
 
+  // If there is no data and loading is
+  // true the BaseGrid will not be displayed
   return (
     <div>
       {loading || !data ? (

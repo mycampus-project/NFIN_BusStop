@@ -8,7 +8,8 @@ const QueryFav = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-
+  // List of favorites
+  // This data should come from Redux
   var IDs = [
     {
       id: "HSL:1140447"
@@ -18,9 +19,10 @@ const QueryFav = () => {
     },
   ]
 
+  // Function goes fetches data from hsl
   const fetchData = () => {
     
-    
+    // for loop to fetch every favorite from above
     for(var i = 0; i < IDs.length; i++){
       
       fetch(url, {
@@ -41,13 +43,15 @@ const QueryFav = () => {
           }
         }`
         }),
-      }).then(res => res.json())
-      .then(resData => {
-        console.log("resData", resData.data.stop.name)
-        setData(data.concat(resData.data))
-        setLoading(false)
-
       })
+      .then(res => res.json())
+      .then(resData => {
+        // After getting response save it to state 
+        setData(data.concat(resData.data))
+        // Loading state is set to be false so the components can be shown
+        setLoading(false)
+      })
+      // Catching errors and loging them to console
       .catch(err => {
         setError(err)
         console.error(error)
@@ -58,15 +62,16 @@ const QueryFav = () => {
   useEffect(() => {
     // Fetch to have data as soon as possible
     fetchData()
-    // Interval to resend the fetch
     
+    // Seting interval for app to fetch the new info on bus stops
     setInterval(() =>{  
       setData([])
       fetchData()   
-    }, 10000)
+    }, 20000)
   },[])
 
-  console.log("allData", data)
+  // If there is no data and loading is
+  // true the BaseGridFav will not be displayed
   return (
     <div>
       {loading || !data ? (
